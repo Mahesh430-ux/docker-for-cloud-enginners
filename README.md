@@ -218,7 +218,6 @@ When we execute:
 docker run myapp
 
 Docker:
-
 1. Reads the Docker image.
 2. Creates an isolated environment.
 3. Starts the application.

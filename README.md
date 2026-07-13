@@ -218,6 +218,7 @@ When we execute:
 docker run myapp
 
 Docker:
+
 1. Reads the Docker image.
 2. Creates an isolated environment.
 3. Starts the application.
@@ -347,3 +348,336 @@ End Users
 | `docker rmi <image_id>`         | Remove an image               |
 | `docker pull <image>`           | Download an image             |
 | `docker push <image>`           | Upload an image to Docker Hub |
+
+Day 3 :-
+
+* Docker Commands - Day 2 (Part 1)
+* 1  docker exec
+❓What does it do?
+The docker exec command allows you to run a command inside an already running container.
+
+Think of it like entering a room (container) that is already occupied, doing some work, and then coming back out.
+
+* 1) docker version`
+* What does it do?
+Displays the Docker Client and Docker Engine (Server) version installed on your system.
+
+*Syntax
+docker version
+
+* Sample Output :-
+Client:
+ Version: 28.2.2
+ API version: 1.51
+
+Server:
+ Engine:
+  Version: 28.2.2
+
+* Explanation :-
+* Client → The Docker CLI that you use to type commands.
+* Server (Docker Engine)** → The background service that creates and manages images and containers.
+* Version → Shows the installed Docker version.
+
+* When do we use it?
+* Verify Docker installation.
+* Check compatibility between Client and Server.
+* Troubleshoot Docker issues.
+
+* 1) docker info:-
+* What does it do?
+Displays detailed information about the Docker environment.
+
+* Syntax
+docker info
+
+* Sample Output
+
+Containers: 5
+ Running: 2
+ Stopped: 3
+Images: 15
+Server Version: 28.2.2
+Storage Driver: overlay2
+CPUs: 4
+Total Memory: 8GB
+
+* Explanation :-
+* Containers → Total containers.
+* Running → Active containers.
+* Stopped → Inactive containers.
+* Images → Total Docker images.
+* Storage Driver → Storage backend used by Docker.
+* CPUs & Memory → Resources available to Docker.
+
+* When do we use it?
+* Check Docker status.
+* Verify system resources.
+* Troubleshoot Docker.
+
+* 4 docker images
+* What does it do?
+Lists all Docker images stored on your local machine.
+
+* Syntax
+docker images
+
+* Sample Output
+REPOSITORY   TAG      IMAGE ID       CREATED        SIZE
+ubuntu       latest   123abc456def   3 days ago     80MB
+nginx        latest   456def789ghi   2 days ago     192MB
+myapp        latest   987xyz654abc   5 minutes ago  250MB
+
+* Explanation
+* Repository → Image name.
+* Tag → Image version.
+* Image ID→ Unique identifier.
+* Created→ Build/download time.
+* Size → Disk usage.
+When do we use it?
+To check which Docker images are available locally.
+
+* 1) docker image ls:-
+What does it do?
+Lists all Docker images.
+
+* Syntax
+docker image ls
+
+*Output
+Same output as:
+docker images
+
+* Explanation
+`docker image ls` is simply the newer and more descriptive version of `docker images`.
+
+* When do we use it
+To view local Docker images.
+
+* 1) docker search :-  
+* What does it do?
+Searches Docker Hub for available images.
+
+* Syntax
+docker search nginx
+
+*Sample Output
+NAME               DESCRIPTION
+nginx              Official nginx image
+bitnami/nginx      Bitnami nginx image
+linuxserver/nginx  Community nginx image
+
+*Explanation
+Docker searches Docker Hub and displays matching images.
+
+When do we use it :-
+Before downloading an image.
+
+* 1) docker pull:-
+* What does it do?
+Downloads an image from Docker Hub.
+
+* Syntax
+docker pull nginx
+
+* Sample Output
+Using default tag: latest
+latest: Pulling from library/nginx
+Digest: sha256:abcd1234...
+Status: Downloaded newer image for nginx:latest
+
+* Explanation
+Docker downloads the image and stores it locally.
+
+* When do we use it?
+Whenever we need an image that is not already available on our system.
+
+* 8)docker run :-
+*What does it do?
+Creates a new container from an image and starts it.
+
+* Syntax
+docker run nginx
+
+* Sample Output
+Container started successfully
+
+(In reality, the container may run in the foreground and show application logs instead of this exact message.)
+
+* Explanation
+Docker performs these steps:
+Image
+  │
+  ▼
+Create Container
+  │
+  ▼
+Start Container
+  │
+  ▼
+Run Application
+
+*When do we use it?
+To launch an application from a Docker image.
+
+* 1) docker ps
+*What does it do?
+Displays only running containers.
+
+*Syntax
+bash
+docker ps
+
+* Sample Output
+CONTAINER ID   IMAGE    STATUS         PORTS
+ab1234cd56ef   nginx    Up 5 minutes   80/tc
+
+* Explanation
+Shows active containers only.
+📌 When do we use it?
+
+To check which containers are currently running.
+
+1) docker ps -a`
+What does it do?
+Displays all containers, including stopped ones.
+
+* Syntax
+docker ps -a
+
+* Sample Output :-
+CONTAINER ID   IMAGE    STATUS
+ab1234         nginx    Up 5 minutes
+bc5678         ubuntu   Exited (0) 2 hours ago
+
+* Explanation
+Shows:
+* Running containers
+* Stopped containers
+* Exited containers
+
+ 📌 When do we use it
+To view the complete container history.
+
+* 1) docker stop :-
+What does it do?
+Stops a running container.
+
+Syntax
+docker stop <container_id>
+
+* Sample Output
+ab1234
+
+*Explanation :-
+Docker gracefully stops the container.
+
+When do we use it?
+Before removing or restarting a container.
+
+* 1) docker start :-
+
+*What does it do?
+Starts a previously stopped container.
+
+* Syntax
+docker start <container_id>
+
+*Sample Output
+ab1234
+
+Explanation:-
+The existing container starts again without creating a new one.
+
+*When do we use it?
+To reuse an existing stopped container.
+Docker restart
+What does it do?
+
+Stops and immediately starts a container.
+
+*Syntax
+docker restart <container_id>
+
+* Sample Output
+ab1234
+
+ Explanation
+Equivalent to:
+docker stop <container_id>
+docker start <container_id>
+
+* When do we use it?
+After changing application settings or if the application becomes unresponsive.
+
+* 1) docker rm
+* What does it do?
+Removes a stopped container.
+
+*Syntax :-
+docker rm <container_id>
+
+*Sample Output :-
+ab1234
+*Explanation:-
+The container is permanently deleted from the system.
+
+* When do we use it?
+To clean up unused containers.
+
+* 1) docker rmi
+*What does it do?
+Deletes a Docker image.
+
+* Syntax :-
+docker rmi nginx
+
+* Sample Output :-
+Untagged: nginx:latest
+Deleted: sha256:abcd1234...
+
+ Explanation :-
+The image is removed from local storage.
+
+* When do we use it?
+To free up disk space by deleting unused images.
+
+* 1) docker logs
+* ❓What does it do?
+Displays logs generated by a container.
+
+* Syntax
+docker logs <container_id>
+
+ Sample Output ;-
+Application Started...
+Database Connected...
+Server Listening on Port 5000...
+
+* Explanation:-
+Shows everything the application has printed since the container started.
+
+* When do we use it?
+To debug errors and monitor application activity.
+
+---
+
+* Quick Revision Table
+
+| Command           | Purpose                                     |
+| ----------------- | ------------------------------------------- |
+| `docker version`  | Display Docker Client and Server versions   |
+| `docker info`     | Show Docker environment details             |
+| `docker images`   | List all local Docker images                |
+| `docker image ls` | List local images (same as `docker images`) |
+| `docker search`   | Search Docker Hub for images                |
+| `docker pull`     | Download an image from Docker Hub           |
+| `docker run`      | Create and start a new container            |
+| `docker ps`       | Show running containers                     |
+| `docker ps -a`    | Show all containers                         |
+| `docker stop`     | Stop a running container                    |
+| `docker start`    | Start a stopped container                   |
+| `docker restart`  | Restart a container                         |
+| `docker rm`       | Remove a stopped container                  |
+| `docker rmi`      | Remove an image                             |
+| `docker logs`     | View container logs                         |

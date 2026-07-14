@@ -681,3 +681,64 @@ To debug errors and monitor application activity.
 | `docker rm`       | Remove a stopped container                  |
 | `docker rmi`      | Remove an image                             |
 | `docker logs`     | View container logs                         |
+
+Day 4 :-
+
+1. Enter a Running Container
+docker exec -it mycontainer /bin/bash
+What it does: Opens a terminal inside the running container.
+
+2. View Container Logs
+docker logs mycontainer
+What it does: Displays everything the application has printed.
+
+3. View Live Logs
+docker logs -f mycontainer
+What it does: Continuously shows new logs as they are generated.
+
+4. Inspect Container
+docker inspect mycontainer
+What it does: Shows detailed information like IP address, mounts, ports, and environment variables.
+
+5. Check Resource Usage
+docker stats
+What it does: Displays live CPU, memory, network, and disk usage of running containers.
+
+6. View Running Processes
+docker top mycontainer
+What it does: Shows processes running inside the container.
+
+7. Check Port Mapping
+docker port mycontainer
+What it does: Displays which host ports are connected to container ports.
+
+8. Rename a Container
+docker rename old_name new_name
+What it does: Changes the name of an existing container.
+
+9. Copy File to Container
+docker cp notes.txt mycontainer:/tmp/
+What it does: Copies a file from your computer into the container.
+
+10. Copy File from Container
+docker cp mycontainer:/tmp/output.txt .
+What it does: Copies a file from the container to your current directory.
+
+11. Export a Container
+docker export mycontainer > container.tar
+What it does: Saves the container's filesystem as a .tar archive.
+
+12. Import a Container
+docker import container.tar myimage
+What it does: Creates a Docker image from an exported container.
+
+13. Save an Image
+docker save -o nginx.tar nginx
+What it does: Saves a Docker image to a tar file for backup or transfer.
+
+14. Load an Image
+docker load -i nginx.tar
+What it does: Restores a previously saved Docker image.
+. Check File Changes
+docker diff mycontainer
+What it does: Shows which files were added (A), changed (C), or deleted (D) inside the container
